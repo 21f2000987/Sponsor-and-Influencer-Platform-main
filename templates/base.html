@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsorship and Influencer Platform</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9faf8;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-brand img {
+            max-width: 60px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .navbar-brand h2 {
+            color: Blue; 
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333333;
+            font-weight: bold;
+        }
+
+        .jumbotron {
+            background-color:#007bff ;
+            color: #333333;
+            text-align: center;
+            padding: 50px 0;
+            margin-bottom: 0;
+        }
+
+        .jumbotron h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* For better readability */
+        }
+
+        .jumbotron p {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: Yellow; 
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .card-title {
+            font-size: 1.9rem;
+            font-weight: bold;
+            color: lightred; 
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+            color: #666666;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            color: #666;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+
+        .footer a {
+            color: #red;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='image.jpeg') }}" alt="Logo">
+            <h2>HANDSHAKE</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('base') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-5">Influencer Engagement and Sponsorship Platform</h1>
+            <p class="lead" style="color: #ffe600;">Connecting Sponsors and Influencers</p>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">About Our Platform</h2>
+                        <p class="card-text">Addressing the needs of influencers and sponsors, our platform bridges the gap and provides opportunities for all. Designed with user-friendly features and specific filters, it ensures an enhanced experience. Join us in transforming the marketplace.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Parashmani Site. All rights reserved. | 
+            <a href="{{ url_for('contact') }}">Contact</a> | 
+                <a href="{{url_for('support')}}">Support</a> | 
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

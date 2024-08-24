@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Campaigns</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    </style>
+</head>
+{% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+<body>
+    <div class="container">
+        <h1>Campaigns</h1>
+        <hr>
+        <!-- Search Campaign -->
+        <form method="POST" action="{{ url_for('view_campaigns') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name.label }}<br>
+                {{ form.name(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
+        </form>
+    
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-group">
+                    {% if campaigns %}
+                        {% for campaign in campaigns %}
+                            <li class="list-group-item">
+                                <h5>{{ campaign.name }}</h5>
+                                <p>{{ campaign.description }}</p>
+                                <p><strong>Budget:</strong> INR{{ campaign.budget }}</p>
+                                <p><strong>Visibility:</strong> {{ campaign.visibility }}</p>
+                                <p><strong>Start Date:</strong> {{ campaign.start_date }}</p>
+                                <p><strong>End Date:</strong> {{ campaign.end_date }}</p>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="list-group-item">No campaigns found.</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <!-- Back button -->
+        <a href="{{ url_for('influencer_dashboard') }}" class="btn btn-secondary mt-3">Back</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-ux7A7zQxDfZ5E2s4sbHv7uhz9Ncby3fMSV2AiBUAX0sHcg/tQ8qc8/JEVYKS0im0" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Itnr4F2woK8JcSQmOrJ1CkEuF3gS2d16F4" crossorigin="anonymous"></script>
+</body>
+</html>

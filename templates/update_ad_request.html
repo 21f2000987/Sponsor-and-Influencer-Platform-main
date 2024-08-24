@@ -1,0 +1,80 @@
+<!-- templates/update_ad_request.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Ad Request</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: Light gray;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin-top: 50px;
+            max-width: 600px;
+        }
+        h2 {
+            color: Blue;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: Blue;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: Dark blue;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2><i class="fas fa-edit mr-2"></i>Update Ad Request</h2>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="username"><i class="fas fa-user mr-2"></i>Influencer Username:</label>
+                {{ form.username(class='form-control', id='username', readonly='readonly') }}
+            </div>
+            <div class="form-group">
+                <label for="messages"><i class="fas fa-user mr-2"></i>Messages:</label>
+                {{ form.messages(class='form-control', id='messages') }}
+            </div>
+            <div class="form-group">
+                <label for="requirements"><i class="fas fa-tasks mr-2"></i>Requirements:</label>
+                {{ form.requirements(class='form-control', id='requirements') }}
+            </div>
+            <div class="form-group">
+                <label for="payment_amount"><i class="fas fa-INR-sign mr-2"></i>Payment Amount:</label>
+                {{ form.payment_amount(class='form-control', id='payment_amount') }}
+            </div>
+            <div class="form-group">
+            <label for="payment_details"><i class="fas fa-INR-sign mr-2"></i>Payment Details for Influencer:</label>
+            {{ form.payment_details(class='form-control', id='payment_details') }}
+            </div>
+            <div class="form-group">
+                <label for="status"><i class="fas fa-check-circle mr-2"></i>Status:</label>
+                {{ form.status(class='form-control', id='status') }}
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i>Update Ad Request</button>
+        </form>
+        <!-- Back button -->
+        <a href="{{ url_for('sponsor_dashboard') }}" class="btn btn-secondary mt-3">Back</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-P1wy7yLr2mU7teZqSRe1MKnj6U6joWqXhAUn5qz/+So8bBMF/X5Y1hFybYLm0kcR" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+V0Zr/Fl8+a/hXDm2j6Rm79x4jK4jQ7jI0b" crossorigin="anonymous"></script>
+</body>
+</html>

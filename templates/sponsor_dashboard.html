@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: Light gray; /* Light gray background */
+            color: #212529; /* Dark text color */
+        }
+        .jumbotron {
+            background-color: gold; /* Dark gray header background */
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+            margin-bottom: 0;
+            position: relative; /* positioning of elements */
+        }
+        .jumbotron h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+        .jumbotron p {
+            font-size: 1.5rem;
+            color: Black;
+        }
+        .top-right-links {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .top-right-links a {
+            color: Black;
+            background-color: transparent !important; /* No background */
+            margin-left: 10px;
+        }
+        .top-right-links a:hover {
+            text-decoration: none;
+        }
+        .top-left-text {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: Black;
+        }
+        .dashboard-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: White;
+            border: 1px solid #dee2e6; /* Light border */
+            border-radius: 8px;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .dashboard-section h2 {
+            font-size: 20px;
+            color: Blue;
+            margin-bottom: 10px;
+        }
+        .dashboard-section p {
+            font-size: 16px;
+            color: #555555;
+            margin-bottom: 15px;
+        }
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+        .button-link:hover {
+            background-color: #0056b3;
+        }
+        .card {
+            transition: transform 0.2s;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); 
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); /* Slightly raised on hover */
+        }
+        .card-title {
+            font-size: 1.25rem;
+            color: Blue;
+            margin-bottom: 0.75rem;
+        }
+        .card-text {
+            font-size: 1rem;
+            color: #555555;
+            margin-bottom: 0.5rem;
+        }
+        .btn-edit {
+            background-color: Green;
+            color: white;
+        }
+        .btn-delete {
+            background-color: Red;
+            color: white;
+        }
+        .btn-create {
+            background-color: Blue;
+            color: white;
+        }
+        .btn-search {
+            background-color: Blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="top-left-text">
+                <p>Welcome {{ name }}</p>
+            </div>
+            
+            <!-- Top right links -->
+            <div class="top-right-links">
+                <a href="{{ url_for('base') }}"><i class="fas fa-home mr-1"></i>Home</a>
+                <a href="{{ url_for('sponsor_edit_profile') }}"><i class="fas fa-user-circle mr-1"></i>Profile</a>
+                <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+            </div>
+            <h1 class="display-4">Sponsor Dashboard</h1>
+            <p class="lead">Manage your Influencers effectively.</p>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <div class="container">
+        <!-- Sponsor Details Section -->
+        <div class="dashboard-section">
+            <h2>Sponsor Details</h2>
+            <p><strong>Username:</strong> {{ current_user.username }}</p>
+        </div>
+        
+        <!-- Campaigns Section -->
+        <h3 class="mt-5">Your Campaigns</h3>
+        <div class="row">
+            {% for campaign in campaigns %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ campaign.name }}</h5>
+                        <p class="card-text">{{ campaign.description }}</p>
+                        <p class="card-text">Start Date: {{ campaign.start_date.strftime('%Y-%m-%d') }}</p>
+                        <p class="card-text">End Date: {{ campaign.end_date.strftime('%Y-%m-%d') }}</p>
+                        <p class="card-text">Budget: INR{{ campaign.budget }}</p>
+                        <p class="card-text">Visibility: {{ campaign.visibility }}</p>
+                        
+                        <!-- Ad Requests -->
+                        <h6 class="mt-3">Ad Requests</h6>
+                        {% if campaign.ad_requests %}
+                        <ul class="list-group">
+                            {% for ad_request in campaign.ad_requests %}
+                            <li class="list-group-item">
+                                Influencer Username: {{ ad_request.username }}<br>
+                                Messages: {{ ad_request.messages }}<br>
+                                Requirements: {{ ad_request.requirements }}<br>
+                                Payment Amount: INR{{ ad_request.payment_amount }}<br>
+                                Payment Details: {{ ad_request.payment_details }}<br>
+                                Status: {{ ad_request.status }}<br>
+                                <div class="btn-group mt-2">
+                                    <a href="{{ url_for('update_ad_request', ad_request_id=ad_request.ad_request_id) }}" class="btn btn-sm btn-edit"><i class="fas fa-edit mr-1"></i>Edit</a>
+                                    <form action="{{ url_for('delete_ad_request', ad_request_id=ad_request.ad_request_id) }}" method="post">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-sm btn-delete"><i class="fas fa-trash-alt mr-1"></i>Delete</button>
+                                    </form>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No ad requests for this campaign.</p>
+                        {% endif %}
+                        
+                        <!-- Button of Ad Request-->
+                        <div class="mt-3">
+                            <a href="{{ url_for('create_ad_request', campaign_id=campaign.campaign_id) }}" class="btn btn-sm btn-create"><i class="fas fa-plus-circle mr-1"></i>Create Ad Request</a>
+                        </div>
+                        
+                        <!-- Buttons of Update and Delete Campaign -->
+                        <div class="mt-3">
+                            <a href="{{ url_for('update_campaign', campaign_id=campaign.campaign_id) }}" class="btn btn-sm btn-edit mr-2"><i class="fas fa-edit mr-1"></i>Update Campaign</a>
+                            <form action="{{ url_for('delete_campaign', campaign_id=campaign.campaign_id) }}" method="post" style="display: inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-sm btn-delete"><i class="fas fa-trash-alt mr-1"></i>Delete Campaign</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Button of Create Campaign -->
+        <a href="{{ url_for('create_campaign') }}" class="btn btn-success mt-4"><i class="fas fa-plus-circle mr-1"></i>Create New Campaign</a>
+        
+        <!-- Link to Search Influencers -->
+        <div class="dashboard-section">
+            <h3 class="mt-5">Search Influencers</h3>
+            <a href="{{ url_for('search_influencers') }}" class="btn btn-search"><i class="fas fa-search mr-1"></i>Search Influencers</a>
+        </div>
+        
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-ux7A7zQxDfZ5E2s4sbHv7uhz9Ncby3fMSV2AiBUAX0sHcg/tQ8qc8/JEVYKS0im0" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Itnr4F2woK8JcSQmOrJ1CkEuF3gS2d16F4" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Influencer Dashboard</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .jumbotron {
+            background-color: #007bff; /* Deep blue header background */
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+            margin-bottom: 0;
+        }
+        .jumbotron h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+        .jumbotron p {
+            font-size: 1.5rem;
+        }
+        .dashboard-links {
+            margin-top: 30px;
+        }
+        .dashboard-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .dashboard-links ul li {
+            margin-bottom: 10px;
+        }
+        .container {
+            color: Black;
+            margin-top: 20px; /* Space between header and content */
+        }
+        .dashboard-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+        .dashboard-section h2 {
+            font-size: 20px;
+            color: Blue;
+            margin-bottom: 10px;
+        }
+        .dashboard-section p {
+            font-size: 16px;
+            color: #555555;
+            margin-bottom: 15px;
+        }
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+        .button-link:hover {
+            background-color: #0056b3;
+        }
+        .top-right-links {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            
+        }
+</style>
+</head>
+<body>
+    <header class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <!-- Top right links -->
+            <div class="top-right-links">
+                <a href="{{ url_for('base') }}" class="btn btn-warning">Home</a>
+                <a href="{{ url_for('edit_profile') }}" class="btn btn-warning">Profile</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-warning">Logout</a>
+            </div>
+            <h1 class="display-4">Influencer Dashboard</h1>
+            <p class="lead">Receive your campaigns and ad requests effectively.</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1>Welcome {{ current_user.name }}!</h1>
+        <div class="dashboard-section">
+            <h2>Influencer Details</h2>
+            <p><strong>Username:</strong> {{ current_user.username }}</p>
+            <p><strong>Niche:</strong> {{ niche }}</p>
+            <p><strong>Reach:</strong> {{ reach }}</p>
+        </div>
+        <!-- Statistics -->
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Campaigns</h5>
+                        <p class="card-text">{{ active_campaigns }} Active Campaigns</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Ad Requests</h5>
+                        <p class="card-text">{{ pending_requests }} Pending Requests</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Negotiations</h5>
+                        <p class="card-text">{{ ongoing_negotiations }} Ongoing Negotiations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{{ url_for('view_campaigns') }}">View Campaigns</a></li>
+                <li><a href="{{ url_for('view_ad_requests', username=current_user.username) }}">View Ad Requests</a></li>
+            </ul>
+        </div>
+        
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-ux7A7zQxDfZ5E2s4sbHv7uhz9Ncby3fMSV2AiBUAX0sHcg/tQ8qc8/JEVYKS0im0" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Itnr4F2woK8JcSQmOrJ1CkEuF3gS2d16F4" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: lavender;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: dark grey;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .flashes li {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+
+        .flashes li.info {
+            background-color: light blue;
+            color: blue;
+        }
+
+        .flashes li.error {
+            background-color: Light red;
+            color: red;
+        }
+
+        .flashes li.success {
+            background-color: Light green;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center mb-4">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='image.jpeg') }}" alt="Logo">
+                <h2>HANDSHAKE</h2>
+            </a>
+            <h2>Register</h2>
+        </div>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label(for='username') }}
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                    {{ form.username(class='form-control', id='username', placeholder='Enter username') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.password.label(for='password') }}
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                    {{ form.password(class='form-control', id='password', placeholder='Enter password') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.role.label(for='role') }}
+                {{ form.role(class='form-control', id='role') }}
+            </div>
+            {% if form.role.data == 'influencer' %}
+                <div class="form-group">
+                    {{ form.reach.label(for='reach') }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-chart-line"></i>
+                            </span>
+                        </div>
+                        {{ form.reach(class='form-control', id='reach', placeholder='Enter reach') }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.niche.label(for='niche') }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-tag"></i>
+                            </span>
+                        </div>
+                        {{ form.niche(class='form-control', id='niche', placeholder='Enter niche') }}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form.name.label(for='name') }}
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-user-circle"></i>
+                        </span>
+                    </div>
+                    {{ form.name(class='form-control', id='name', placeholder='Enter name') }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li class="alert alert-info">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Back button -->
+        <a href="/" class="btn btn-secondary mt-3">Back</a>
+    </div>
+    
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-QZASOePn1eA0Z2ENmPPhX1tbdW3sQvKGbyrJLjOPfEfV+q1nsBy+V3fW9AaxOJ6D" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+V0Zr/Fl8+a/hXDm2j6Rm79x4jK4jQ7jI0b" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

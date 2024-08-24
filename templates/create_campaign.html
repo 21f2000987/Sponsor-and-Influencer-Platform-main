@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <title>Create Campaign</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            max-width: 600px;
+        }
+        h2 {
+            color: Blue;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: Blue;
+            border-color: #007bff;
+            width: calc(50% - 5px);
+        }
+        .btn-primary:hover {
+            background-color: Blue;
+            border-color: #0056b3;
+        }
+        .btn-back {
+            margin-bottom: 10px;
+            width: calc(50% - 5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2><i class="fas fa-bullhorn mr-2"></i>Create Campaign</h2>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="name"><i class="fas fa-file-alt mr-2"></i>Campaign Name:</label>
+                {{ form.name(class='form-control', id='name', placeholder='Enter Campaign Name') }}
+            </div>
+            
+            <div class="form-group">
+                <label for="description"><i class="fas fa-info-circle mr-2"></i>Description:</label>
+                {{ form.description(class='form-control', id='description', placeholder='Enter Description') }}
+            </div>
+            <div class="form-group">
+                <label for="start_date"><i class="fas fa-calendar-alt mr-2"></i>Start Date:</label>
+                {{ form.start_date(class='form-control', id='start_date') }}
+            </div>
+            <div class="form-group">
+                <label for="end_date"><i class="fas fa-calendar-alt mr-2"></i>End Date:</label>
+                {{ form.end_date(class='form-control', id='end_date') }}
+            </div>
+            <div class="form-group">
+                <label for="budget"><i class="fas fa-inr-sign mr-2"></i>Budget:</label>
+                {{ form.budget(class='form-control', id='budget', placeholder='Enter Budget') }}
+            </div>
+            <div class="form-group">
+                <label for="visibility"><i class="fas fa-eye mr-2"></i>Visibility:</label>
+                {{ form.visibility(class='form-control', id='visibility') }}
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle mr-2"></i>Create Campaign</button>
+                <a href="{{ url_for('sponsor_dashboard') }}" class="btn btn-secondary btn-back"><i class="fas fa-arrow-left mr-2"></i>Back</a>
+            </div>
+        </form>
+    </div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-P1wy7yLr2mU7teZqSRe1MKnj6U6joWqXhAUn5qz/+So8bBMF/X5Y1hFybYLm0kcR" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+V0Zr/Fl8+a/hXDm2j6Rm79x4jK4jQ7jI0b" crossorigin="anonymous"></script>
+</body>
+</html>
